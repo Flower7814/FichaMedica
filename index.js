@@ -5,7 +5,6 @@ document.addEventListener("DOMContentLoaded", function() {
     const limpiar = document.getElementById("Limpiar"); 
     const form = document.querySelector("form");
 
-    
     const popup = document.getElementById("popup");
     const popupMessage = document.getElementById("popup-message");
     const popupClose = document.getElementById("popup-close");
@@ -20,6 +19,27 @@ document.addEventListener("DOMContentLoaded", function() {
     }
 
     
+    function validarRUT(rut) {
+        rut = rut.replace(/\./g, '').replace('-', '');
+        let cuerpo = rut.slice(0, -1);
+        let dv = rut.slice(-1).toUpperCase();
+
+        if (!/^\d+$/.test(cuerpo)) return false;
+
+        let suma = 0;
+        let multiplo = 2;
+
+        for (let i = cuerpo.length - 1; i >= 0; i--) {
+            suma += parseInt(cuerpo[i]) * multiplo;
+            multiplo = multiplo < 7 ? multiplo + 1 : 2;
+        }
+
+        let dvEsperado = 11 - (suma % 11);
+        dvEsperado = dvEsperado === 11 ? '0' : dvEsperado === 10 ? 'K' : dvEsperado.toString();
+
+        return dv === dvEsperado;
+    }
+
     if (guardar) {
         guardar.onclick = function() {
             const rut = document.getElementById("Rut").value.trim();
@@ -35,15 +55,26 @@ document.addEventListener("DOMContentLoaded", function() {
             const comentarios = document.getElementById("Comentarios").value.trim();
 
             
-            if (!rut || !nombres || !apellidos) { showPopup("Por favor, complete los campos obligatorios."); return; }
-            if (!estadoCivil) { showPopup("Seleccione el estado civil."); return; }
+            if (!rut || !nombres || !apellidos) {
+                showPopup("Por favor, complete los campos obligatorios.");
+                return;
+            }
 
-            
+            if (!validarRUT(rut)) {
+                showPopup("RUT inválido. Por favor ingrese un RUT correcto.");
+                return;
+            }
+
+            if (!estadoCivil) {
+                showPopup("Seleccione el estado civil.");
+                return;
+            }
+
             const pacientes = JSON.parse(localStorage.getItem("pacientes") || "[]");
             const existingIndex = pacientes.findIndex(p => p.rut === rut);
 
             if (existingIndex !== -1) {
-                
+               
                 popupMessage.innerHTML = `
                     Este RUT ya existe. ¿Desea sobrescribir los datos?<br><br>
                     <button id="popup-yes">Sí</button>
@@ -73,14 +104,11 @@ document.addEventListener("DOMContentLoaded", function() {
         };
     }
 
-    
     if (limpiar) {
         limpiar.onclick = function() {
             form.reset();
         };
     }
 });
-
-
 
 
