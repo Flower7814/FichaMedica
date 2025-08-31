@@ -18,7 +18,6 @@ document.addEventListener("DOMContentLoaded", function() {
         popup.style.display = "none";
     }
 
-    
     function validarRUT(rut) {
         rut = rut.replace(/\./g, '').replace('-', '');
         let cuerpo = rut.slice(0, -1);
@@ -40,6 +39,18 @@ document.addEventListener("DOMContentLoaded", function() {
         return dv === dvEsperado;
     }
 
+    function validarFechaNacimiento(fecha) {
+        if (!fecha) return false;
+        const fechaIngresada = new Date(fecha);
+        const hoy = new Date();
+        const fechaMin = new Date("1925-01-01");
+        return fechaIngresada >= fechaMin && fechaIngresada <= hoy;
+    }
+
+    function validarTelefonoChile(telefono) {
+        return /^\+569\d{8}$/.test(telefono);
+    }
+
     if (guardar) {
         guardar.onclick = function() {
             const rut = document.getElementById("Rut").value.trim();
@@ -50,23 +61,37 @@ document.addEventListener("DOMContentLoaded", function() {
             const region = document.querySelector("select").value;
             const telefono = document.getElementById("Teléfono").value.trim();
             const email = document.getElementById("Email").value.trim();
-            const fechaNacimiento = document.getElementById("Fecha de Nacimiento").value;
+            const fechaNacimiento = document.getElementById("FechaNacimiento").value;
             const estadoCivil = document.querySelector('input[name="Estado civil"]:checked');
             const comentarios = document.getElementById("Comentarios").value.trim();
 
-            
             if (!rut || !nombres || !apellidos) {
-                showPopup("Por favor, complete los campos obligatorios.");
+                showPopup("Please complete the required fields.");
                 return;
             }
 
             if (!validarRUT(rut)) {
-                showPopup("RUT inválido. Por favor ingrese un RUT correcto.");
+                showPopup("Invalid RUT. Please enter a valid RUT.");
                 return;
             }
 
             if (!estadoCivil) {
-                showPopup("Seleccione el estado civil.");
+                showPopup("Please select marital status.");
+                return;
+            }
+
+            if (!validarTelefonoChile(telefono)) {
+                showPopup("Invalid phone number. It must be in format +569XXXXXXXX.");
+                return;
+            }
+
+            if (!validarFechaNacimiento(fechaNacimiento)) {
+                showPopup("Invalid date of birth. It must be between 1925 and today.");
+                return;
+            }
+
+            if (!comentarios) {
+                showPopup("Please write a comment.");
                 return;
             }
 
@@ -74,10 +99,9 @@ document.addEventListener("DOMContentLoaded", function() {
             const existingIndex = pacientes.findIndex(p => p.rut === rut);
 
             if (existingIndex !== -1) {
-               
                 popupMessage.innerHTML = `
-                    Este RUT ya existe. ¿Desea sobrescribir los datos?<br><br>
-                    <button id="popup-yes">Sí</button>
+                    This RUT already exists. Do you want to overwrite the data?<br><br>
+                    <button id="popup-yes">Yes</button>
                     <button id="popup-no">No</button>
                 `;
                 popup.style.display = "flex";
@@ -86,7 +110,7 @@ document.addEventListener("DOMContentLoaded", function() {
                     pacientes[existingIndex] = { rut, nombres, apellidos, direccion, ciudad, region, telefono, email, fechaNacimiento, estadoCivil: estadoCivil.value, comentarios };
                     localStorage.setItem("pacientes", JSON.stringify(pacientes));
                     popup.style.display = "none";
-                    showPopup("Datos sobrescritos correctamente!");
+                    showPopup("Data overwritten successfully!");
                     form.reset();
                 };
 
@@ -95,10 +119,9 @@ document.addEventListener("DOMContentLoaded", function() {
                 };
 
             } else {
-                
                 pacientes.push({ rut, nombres, apellidos, direccion, ciudad, region, telefono, email, fechaNacimiento, estadoCivil: estadoCivil.value, comentarios });
                 localStorage.setItem("pacientes", JSON.stringify(pacientes));
-                showPopup("Datos guardados correctamente!");
+                showPopup("Data saved successfully!");
                 form.reset();
             }
         };
@@ -110,5 +133,3 @@ document.addEventListener("DOMContentLoaded", function() {
         };
     }
 });
-
-

@@ -14,21 +14,21 @@
     </header>
     <main>
     <form action="index.php" method="get">
-        <h2>Por favor, ingrese sus datos para registrarse </h2>
+        <h2>Please enter your data to register</h2>
 
        <label for="Rut">Rut:</label>
         <input type="text" id="Rut"  placeholder="Rut">
 
-        <label for="Nombres">Nombres:</label>
+        <label for="Nombres">Names:</label>
         <input type="text" id="Nombres" required>
 
-        <label for="Apellidos">Apellidos:</label>
+        <label for="Apellidos">Surnames:</label>
         <input type="text" id="Apellidos" required>
 
-        <label for="Dirección">Dirección:</label>
+        <label for="Dirección">Address:</label>
         <input type="text" id="Dirección" required>
         
-        <label for="Ciudad">Ciudad:</label>
+        <label for="Ciudad">City:</label>
         <input type="text" id="Ciudad" required>
 
         <label for="Region">Region:</label>
@@ -51,38 +51,37 @@
             <option>Magallanes y de la Antártica Chilena</option>
         </select>
 
-        <label for="Teléfono">Teléfono:</label>
-        <input type="text" id="Teléfono" placeholder="+569" required>
-
+        <label for="Teléfono">Phone:</label>
+        <input type="text" id="Teléfono" placeholder="+569XXXXXXXX" required>
 
         <label for="Email">Email:</label>
         <input type="email" id="Email" placeholder="Email">
 
-        <label for="Fecha de Nacimiento">Fecha de Nacimiento:</label>
-        <input type="date" id="Fecha de Nacimiento" required>
+        <label for="FechaNacimiento">Date of Birth:</label>
+        <input type="date" id="FechaNacimiento" required>
 
-        <label>Estado Civil:</label>
+        <label>Marital Status:</label>
 
-        <input type="radio" id="soltero" name="Estado civil" value="Soltero/a" required>
-        <label for="soltero">Soltero/a</label>
+        <input type="radio" id="soltero" name="Estado civil" value="Single" required>
+        <label for="soltero">Single</label>
 
-        <input type="radio" id="casado" name="Estado civil" value="Casado/a">
-        <label for="casado">Casado/a</label>
+        <input type="radio" id="casado" name="Estado civil" value="Married">
+        <label for="casado">Married</label>
 
-        <input type="radio" id="divorciado" name="Estado civil" value="Divorciado/a">
-        <label for="divorciado">Divorciado/a</label>
+        <input type="radio" id="divorciado" name="Estado civil" value="Divorced">
+        <label for="divorciado">Divorced</label>
 
-        <input type="radio" id="viudo" name="Estado civil" value="Viudo/a">
-        <label for="viudo">Viudo/a</label>
+        <input type="radio" id="viudo" name="Estado civil" value="Widowed">
+        <label for="viudo">Widowed</label>
         
         <div class="form-group">
-        <label for="Comentarios">Comentarios:</label>
+        <label for="Comentarios">Comments:</label>
         <textarea id="Comentarios" required></textarea>
         </div>
 
         <div id="Buttons">
-        <button type="button" id="Guardar">Guardar</button>
-        <button type="button" id="Limpiar">Limpiar</button>
+        <button type="button" id="Guardar">Save</button>
+        <button type="button" id="Limpiar">Clear</button>
         </div>
     </form>
     
@@ -94,11 +93,11 @@
         <small><a href="mailto:Fichamedica@gmail.com">FichaMedica@gmail.com</a></small>
     </footer>
     <div id="popup" class="popup">
-  <div class="popup-content">
-    <p id="popup-message"></p>
-    <button id="popup-close">OK</button>
-  </div>
-</div>
+      <div class="popup-content">
+        <p id="popup-message"></p>
+        <button id="popup-close">OK</button>
+      </div>
+    </div>
     <script src="index.js"></script>
 </body>
 </html>
