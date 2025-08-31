@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formulario</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+    <h1>Formulario de Ingreso - Ficha Médica</h1>
+    <a href="busqueda.html">Buscar Paciente</a>
+    <hr>
+    </header>
+    <main>
+    <form action="index.php" method="get">
+        <h2>Por favor, ingrese sus datos para registrarse </h2>
+
+       <label for="Rut">Rut:</label>
+        <input type="text" id="Rut"  placeholder="Rut">
+
+        <label for="Nombres">Nombres:</label>
+        <input type="text" id="Nombres" required>
+
+        <label for="Apellidos">Apellidos:</label>
+        <input type="text" id="Apellidos" required>
+
+        <label for="Dirección">Dirección:</label>
+        <input type="text" id="Dirección" required>
+        
+        <label for="Ciudad">Ciudad:</label>
+        <input type="text" id="Ciudad" required>
+
+        <label for="Region">Region:</label>
+        <select> 
+            <option>Arica</option>
+            <option>Tarapacá</option>
+            <option>Antofagasta</option>
+            <option>Atacama</option>
+            <option>Coquimbo</option>
+            <option>Valparaíso</option>
+            <option>Metropolitana de Santiago</option>
+            <option>O'Higgins</option>
+            <option>Maule</option>
+            <option>Ñuble</option>
+            <option>Biobío</option>
+            <option>Araucanía</option>
+            <option>Los Ríos</option>
+            <option>Los Lagos</option>
+            <option>Aysén</option>
+            <option>Magallanes y de la Antártica Chilena</option>
+        </select>
+
+        <label for="Teléfono">Teléfono:</label>
+        <input type="text" id="Teléfono" placeholder="+569" required>
+
+
+        <label for="Email">Email:</label>
+        <input type="email" id="Email" placeholder="Email">
+
+        <label for="Fecha de Nacimiento">Fecha de Nacimiento:</label>
+        <input type="date" id="Fecha de Nacimiento" required>
+
+        <label>Estado Civil:</label>
+
+        <input type="radio" id="soltero" name="Estado civil" value="Soltero/a" required>
+        <label for="soltero">Soltero/a</label>
+
+        <input type="radio" id="casado" name="Estado civil" value="Casado/a">
+        <label for="casado">Casado/a</label>
+
+        <input type="radio" id="divorciado" name="Estado civil" value="Divorciado/a">
+        <label for="divorciado">Divorciado/a</label>
+
+        <input type="radio" id="viudo" name="Estado civil" value="Viudo/a">
+        <label for="viudo">Viudo/a</label>
+        
+        <div class="form-group">
+        <label for="Comentarios">Comentarios:</label>
+        <textarea id="Comentarios" required></textarea>
+        </div>
+
+        <div id="Buttons">
+        <button type="button" id="Guardar">Guardar</button>
+        <button type="button" id="Limpiar">Limpiar</button>
+        </div>
+    </form>
+    
+    </main>
+    <footer>
+        <hr>
+        Author: Oguzhan<br>
+        &copy; Copyright reserved<br>
+        <small><a href="mailto:Fichamedica@gmail.com">FichaMedica@gmail.com</a></small>
+    </footer>
+    <div id="popup" class="popup">
+  <div class="popup-content">
+    <p id="popup-message"></p>
+    <button id="popup-close">OK</button>
+  </div>
+</div>
+    <script src="index.js"></script>
+</body>
+</html>
