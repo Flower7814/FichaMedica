@@ -51,6 +51,10 @@ document.addEventListener("DOMContentLoaded", function() {
         return /^\+569\d{8}$/.test(telefono);
     }
 
+    function validarTextoLargo(texto) {
+        return texto.length >= 3 && texto.length <= 25;
+    }
+
     if (guardar) {
         guardar.onclick = function() {
             const rut = document.getElementById("Rut").value.trim();
@@ -67,6 +71,16 @@ document.addEventListener("DOMContentLoaded", function() {
 
             if (!rut || !nombres || !apellidos) {
                 showPopup("Please complete the required fields.");
+                return;
+            }
+
+            if (!validarTextoLargo(nombres)) {
+                showPopup("Name must be between 3 and 25 characters.");
+                return;
+            }
+
+            if (!validarTextoLargo(apellidos)) {
+                showPopup("Surname must be between 3 and 25 characters.");
                 return;
             }
 
